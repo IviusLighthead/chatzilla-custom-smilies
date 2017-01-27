@@ -14,18 +14,18 @@ You will need to upload the CSS and XML file along with any smilies or images on
 
 This is the main configurable area for adding smilies. Instances of :crazy: will be replaced with the appropriate image in the below example.
 
-```
+```js
 
 var find = [
-			/:crazy:/, 	
-			/:roll:/,	
-			/:illcontent:/	
-		];
+	/:crazy:/, 	
+	/:roll:/,	
+	/:illcontent:/	
+];
 var replaceWith = [
-			"<img src=\"http://www.lighthead.net/mf/icons/smilies/crazy.gif\">", 	
-			"<img src=\"http://www.lighthead.net/mf/icons/flashemotes/16x16/smi_roll.gif\">", 	
-			"<img src=\"http://www.lighthead.net/mf/icons/flashemotes/16x16/smi_ill_content.gif\">"	
-		];
+	"<img src=\"http://www.lighthead.net/mf/icons/smilies/crazy.gif\">", 	
+	"<img src=\"http://www.lighthead.net/mf/icons/flashemotes/16x16/smi_roll.gif\">", 	
+	"<img src=\"http://www.lighthead.net/mf/icons/flashemotes/16x16/smi_ill_content.gif\">"	
+];
 
 ```
-[![chatzilla-screenshot](http://www.lighthead.net/images/chatzilla-custom-smilies.png)]
+[![chatzilla-screenshot](http://www.lighthead.net/images/chatzilla-custom-smilies.png)](http://www.lighthead.net/images/chatzilla-custom-smilies.png)
