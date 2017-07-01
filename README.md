@@ -7,6 +7,7 @@ ChatZilla is an IRC client that is an extension to FireFox. This uses ChatZilla'
 Files included:
 + chatzilla.css - This is the main CSS file that will be linked from within ChatZilla's preferences
 + xml-js.xml - This is the javascript embedded within XML that will be allowed to run within the ChatZilla window. This file is linked from within the CSS file using -moz-binding: url().
++ smiles.php - An SVG file embedded with a PHP file for the smilies toggle button
 
 You will need to upload the CSS and XML file along with any smilies or images onto a server or somewhere that can be publicly accessed. The URL to this location shouldn't change much either otherwise you'd need to give out the new link each time. The setting within ChatZilla for the CSS is ChatZilla > Preferences > Global Settings > Appearance > Current Motif
 
