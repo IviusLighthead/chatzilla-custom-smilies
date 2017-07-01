@@ -8,13 +8,20 @@
 	  
 	   <![CDATA[		
 		
-		// Get Top Header/Topic Area		
+		var version = '1.0.1';
 
-		//var topicHeader = document.getElementById("ch-container");
-		var topicHeader = document.querySelector(".header-outer");
-		//var topicHeader = document.getElementById("usr-container");
 
-		// Replace Arrays
+		var topicHeader = document.querySelector(".header-outer div:nth-of-type(3) tr:nth-of-type(2)"); // Select 2nd Table Row In Topic Heading
+		var topicAfter = document.querySelector(".header-outer"); // Handle for placing smilies after
+		var topicLabel = document.querySelector(".header-outer div:nth-of-type(3) tr:nth-of-type(2) td.label"); // Select topic label button
+
+		var chatname = document.getElementById("splash");
+		var lastmodified = document.createElement("p");
+		lastmodified.className = "lastmodified";
+		lastmodified.innerHTML = "JS Version: " + version;
+		chatname.appendChild(lastmodified);
+
+		// Replace Text With Smilies - Use Your Own Smilies Here
 
 		var find = [
 			/:crazy:/, 	
@@ -27,19 +34,29 @@
 			"<img src=\"http://www.lighthead.net/mf/icons/flashemotes/16x16/smi_ill_content.gif\">"	
 		];
 
-		// Button below topic header
+		// Remove onclick even for TR
+
+		topicHeader.removeAttribute("onclick");
+		topicLabel.onclick = function(event){
+			onTopicNodesClick(event);		
+		}	
+
+		// Create Menu Buttons
+
+		var menuTD = document.createElement("td");
+		menuTD.className = "menuIcons";
+
+		var menuUL = document.createElement("ul");
+		menuUL.className = "menu";
+		menuTD.appendChild(menuUL);
 
 		// Smilies
 
-		var smilies = document.createElement("input");	
+		var smilies	= document.createElement("li");	
+		smilies.innerHTML = "<span id=\"smileyToggle\" class=\"smilies\" data-numSmilies=\"" + find.length + "\"></span>";
+		menuUL.appendChild(smilies);
 
-		smilies.value = "Smilies (" + find.length + ")";
-		smilies.className = "chatButton";	
-		smilies.type = "button";
-		smilies.id = "smileyToggle";
-
-		topicHeader.appendChild(smilies);
-
+		
 		// Build Smiley Drown Down HTML
 			
 		var smileyHTML = "<dl>";
@@ -50,38 +67,41 @@
 		}
 		smileyHTML += "</dl>";
 
+
+
 		// Hidden Div with Smiley Info
 
 		var smiliesDiv = document.createElement("div");	
 		smiliesDiv.id = "smileyBox";
 		smiliesDiv.className = "boxHide";
 		smiliesDiv.innerHTML = smileyHTML;
-		topicHeader.appendChild(smiliesDiv);
+		topicAfter.appendChild(smiliesDiv);
 
-		// Toggle the smiley box when the button is clicked
+		// Append the menu table cell to the topic heading
+		topicHeader.appendChild(menuTD);
 
-		smileyToggle.onclick = function()		
-		{			
-			smiliesDiv.className = ((smiliesDiv.className != 'boxShow') ? 'boxShow' : 'boxHide');			
+
+		// Button Events
+
+		smileyToggle.onclick = function(evt)		
+		{
+			smiliesDiv.className = ((smiliesDiv.className != 'boxShow') ? 'boxShow' : 'boxHide');
+			smileyToggle.className = ((smileyToggle.className != 'smilies active') ? 'smilies active' : 'smilies');
+			
 		}
 
 
 		// Replace Message Content
 
-		window.addEventListener("animationstart",function(e){
+		window.addEventListener("animationstart",function(e){	
+	
+			var lastMSG = document.querySelector(".msg-table tbody").lastChild;			
+			var msgtxt = lastMSG.childNodes[2].childNodes[0].innerHTML;
+			var msgtype = lastMSG.getAttribute('msg-type');		
 			
-			// Select all chat messages (not including username column)
-			allMSGs = document.querySelectorAll(".msg-data span");
+			lastMSG.childNodes[2].childNodes[0].innerHTML = msgtxt.replaceArray(find, replaceWith);
 			
-			// Loop through all messages
-			for (var j=0; j<allMSGs.length; j++){	
-			
-				var str = allMSGs[j].innerHTML;				
-				allMSGs[j].innerHTML = str.replaceArray(find, replaceWith);	
-				
-			}	
 		},false);
-
 
 
 		// Code from stackoverflow
