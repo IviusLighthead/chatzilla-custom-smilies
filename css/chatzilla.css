@@ -41,29 +41,45 @@
  *  see output-base.css for details. 
  */
 
-/*@import url(output-base.css);*/
-
 
 @import url('https://fonts.googleapis.com/css?family=Heebo|Droid+Sans+Mono');
 
 
 
 body.chatzilla-body {              
-    /* output window. */
-    color: #FFFFCC; 
-	background-color:#090909;	
+    color: #FFFFCC;   	
+	background-color:#000029;	
 	font-family: Heebo, Verdana, Arial, sans-serif;
 	-moz-binding: url('../scripts/xml-js.xml');
 	font-size:100%;	
 }
 
 
+
 a.chatzilla-link {
     color: #fffdd6;
 }
 
-a.chatzilla-link:visited {
-    color: lightgrey;
+td.label {
+	color:white;
+	background-color:#004;
+	border-radius:3px;
+	padding:5px;
+	text-align:center;
+	width:50px;	
+	transition:all 0.3s;
+	cursor:pointer;
+	border:none;
+}
+
+td.label:hover {
+	color:black;
+	background-color:white;	
+}
+
+td.value {
+	padding-left:15px;
+	padding-top:5px;
 }
 
 .header-outer {
@@ -72,27 +88,49 @@ a.chatzilla-link:visited {
     top: 0%;
     transform: translateX(-50%);	
 	width:100%;
+	z-index:2;	
+	pointer-events: none;
+	margin:-2px;
 }
 
 
-.header {
-    color: cyan;    	
+.header {    
+	color:#9999ff;	   	
 	font-size:80%;
-	background-color:#222222;		
+	background-color:rgba(0,0,130,0.95);		
 	border:none;	
 	z-index:1000;		
 	width:100%;	
-	padding:5px;	
-	border-bottom:2px solid #444;	
+	padding:5px;		
+	box-shadow: 0px 2px 20px 1px rgba(0,0,0,0.5);
+	text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.55);
+	pointer-events: auto;
 }
 
+.header span {
+	color:#9999ff;
+}	
 
+.header a,.header > .chatzilla-link {
+	color:#c4c4ff;
+	text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.55);
+}	
+
+.header-outer div:nth-of-type(3) tr:nth-of-type(1) {
+	display:none;
+}	
+
+.msg-table
+{		
+	position:relative;
+	z-index:1;
+}
 
 .msg {
 	transition:all;
 	animation-name: msgappear;
 	animation-duration: 0.5s;	
-	animation-iteration-count: 1;
+	animation-iteration-count: 1;	
 }
 
 @keyframes msgappear {
@@ -105,11 +143,17 @@ a.chatzilla-link:visited {
 }
 
 #splash-wrapper #splash {
-	font-size:5em;
-	letter-spacing:0.3em;	
-	color:cyan;
+	font-size:4em;
+	letter-spacing:0.2em;	
+	color:cyan; 
 }
 
+.lastmodified {
+	opacity:0.5;
+	font-size:10px;
+	letter-spacing:2px;
+	font-weight:normal;
+}	
 
 .msg-data {
 	padding-left:5px;
@@ -128,6 +172,7 @@ treechildren {
     background: black;
     color: white;
 }
+
 
 /* For Mac, who's theme sucks. */
 treechildren:-moz-tree-row(unselected),
@@ -275,11 +320,16 @@ treechildren::-moz-tree-cell-text(unselected) {
 
  
 #important0 td,#important1 td,#important2 td,#important3 td {color:#FFFFFF;}
+/*
+#important0,#important1 {background-color:#000011;}
+*/
 
 
-/* Remove <> from names */
+
+
 .msg-user:before,
-.msg-user:after {
+.msg-user:after 
+{
     display:none;
 }
 
@@ -322,35 +372,42 @@ treechildren::-moz-tree-cell-text(unselected) {
 
 .boxShow {	
 	opacity:1;
-	transition:all 0.3s;
-	background-color:rgba(0,0,0,0.7);
+	transition:all 0.3s cubic-bezier(.9,.13,.48,1);
+	background-color:rgba(0,0,117,0.8);	
 	transform: translate(0px,0px);	
 	color:cyan;	
 	padding:1em;
 	width:300px;	
 	border-radius:3px;
+	box-shadow: 0px 2px 20px 1px rgba(0,0,0,0.5);
+	position:relative;
+	z-index:100;	
 }
 
 .boxHide {	
 	padding:1em;	
 	transform: translate(-400px,0px);	
 	opacity:0;
-	transition:all 0.3s;		
-	height:0px;
-	width:300px;	
+	transition:all 0.3s cubic-bezier(.9,.13,.48,1);	
+	width:300px;
+	background-color:rgba(0,0,117,0.8);	
+	box-shadow: 0px 2px 20px 1px rgba(0,0,0,0.5);		
+	position:relative;
+	z-index:-999;
 }
 
-.chatButton {
+#ch-topiccancel {
 	border-radius:3px;
-	background-color:rgba(125,125,125,0.5);	
+	background-color:#004; 
 	padding:5px;
-	color:white;	
+	color:#fff; 
 	border:none;
 	transition:all 0.5s;
-	margin:5px;	
+	margin:5px;		
+	cursor:pointer;
 }
 
-.chatButton:hover {		
+#ch-topiccancel:hover {		
 	background-color:rgba(255,255,255,1);
 	color:black;
 	transition:all 0.5s;
@@ -360,7 +417,8 @@ treechildren::-moz-tree-cell-text(unselected) {
 	list-style-type:none;
 }
 
-dt { 
+dt 
+{ 
 	float: left;
     clear: left;    
     text-align: right;
@@ -380,6 +438,16 @@ dd img {
 	padding-left:10px;
 }
 
+.command {
+	font-size:14px;
+	
+}
+
+.command:after {
+	content: " -->";
+}
+
+
 	
 table {
 	border:0px;	
@@ -387,7 +455,9 @@ table {
 }
 
 
-.msg-timestamp {	
+
+.msg-timestamp
+{	
 	font-family:'Droid Sans Mono', Verdana;
 	opacity:0.5;
 	transition:all 0.5s;
@@ -397,21 +467,109 @@ table {
 	padding-top:5px;
 }
 
-.msg-timestamp:hover {	
+.msg-timestamp:hover
+{	
 	opacity:1;
 }
 
+.msg[important="true"]
+{
+	/*animation: stalk 3s 10 alternate;	*/
+	background-color: #220000;	
+	box-shadow: inset 0px 0px 4px 0px rgba(255,0,0,0.7);
+	
+}
 
-.msg[important="true"] * {	
-	background-color: #770000;	
+.msg[important="true"] *
+{	
 	color:#FFF !important;
 	opacity:1 !important;
 }
 
-/* Colorize usernames if desired */
+@keyframes stalk {
+    0%   {background-color: #990000;}   
+    100%  {background-color: #110000;}   
+}
+
+
+/* Menu Icons */
+
+.menuIcons {
+	text-align:right;
+	width:50px;
+}
+
+.menu {	
+	margin:0px;	
+	padding:0px;
+}
+
+.menu span,.menu a {
+	display:inline-block;
+	height:25px;
+	width:25px;
+	transition:all 0.5s ease-in-out;
+}	
+
+.menu li {
+	display:inline-block;	
+	list-style:none;
+	float:left;	
+	margin-left:5px;	
+	width:30px;
+	cursor:pointer;	
+}	
+
+.menu .smilies {	
+	background-image:url("../scripts/smilies.php?b=0,0,68,1&i=255,255,255,1");
+	background-repeat:none;		
+}
+
+.menu .smilies:hover {	
+	background-image:url("../scripts/smilies.php?b=255,255,255,1&i=0,0,0,1");	
+}
+
+.smilies.active {
+	background-image:url("../scripts/smilies.php?b=255,255,255,1&i=0,0,0,1") !important;	
+}	
+
+
+
+.menu .smilies:after {
+	content:attr(data-numSmilies);
+	display:inline-block;
+	width:10px;
+	height:10px;
+	padding:0px;
+	background-color:#7c0055;
+	color:white;
+	font-size:7px;
+	border-radius:50%;
+	position:relative;
+	bottom:-8px;
+	left:5px;
+	text-align:center;
+}	
+
+
+
+#ch-topicinput
+{
+	padding:7px;
+	box-sizing:border-box;
+	background-color:rgba(0,0,0,0.5);
+	outline:none;
+	resize:none;
+	border:0;	
+	transition:all .3s;
+	color:white;
+	border-radius:3px;
+}
+
+/* For custom colored names */
+
 .msg[msg-user*="lighty"] * { color: #FCEE35; }
 
-/* Links posted are white */
+/* White links */ 
+
 .msg-data a { color:white !important; }
-
-
