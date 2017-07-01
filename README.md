@@ -29,4 +29,4 @@ var replaceWith = [
 ];
 
 ```
-[![chatzilla-screenshot](http://www.lighthead.net/images/chatzilla-custom-smilies.png)](http://www.lighthead.net/images/chatzilla-custom-smilies.png)
+[![chatzilla-screenshot](http://www.lighthead.net/images/chatzilla-custom-smilies2.png)](http://www.lighthead.net/images/chatzilla-custom-smilies2.png)
